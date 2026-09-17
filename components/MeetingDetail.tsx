@@ -36,7 +36,7 @@ export default function MeetingDetail({ meeting }: { meeting: SacramentMeeting }
 
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Order of Service</h2>
-        <ul className="space-y-1">
+        <ul className="space-y-1 list-disc pl-5">
           <li>Opening Hymn: {meeting.openingHymn.number} - {meeting.openingHymn.title}</li>
           <li>Opening Prayer: {meeting.openingPrayer}</li>
           <li>
@@ -44,16 +44,18 @@ export default function MeetingDetail({ meeting }: { meeting: SacramentMeeting }
           </li>
           <li>Ward Business: {meeting.wardBusiness.map((b) => b.description).join(", ") || "None"}</li>
           {meeting.stakeBusiness && <li>Stake Business</li>}
-          <li>Speakers:</li>
-          <ul className="list-disc pl-5">
-            {meeting.speakers.map((speaker, index) => (
-              <li key={index}>
-                {speaker.name}
-                {speaker.topic ? ` - ${speaker.topic}` : ""}
-                <span className="text-zinc-500"> ({speaker.type})</span>
-              </li>
-            ))}
-          </ul>
+          <li>
+            Speakers:
+            <ul className="list-disc pl-5 mt-1">
+              {meeting.speakers.map((speaker, index) => (
+                <li key={index}>
+                  {speaker.name}
+                  {speaker.topic ? ` - ${speaker.topic}` : ""}
+                  <span className="text-zinc-500"> ({speaker.type})</span>
+                </li>
+              ))}
+            </ul>
+          </li>
           <li>Closing Hymn: {meeting.closingHymn.number} - {meeting.closingHymn.title}</li>
           <li>Closing Prayer: {meeting.closingPrayer}</li>
         </ul>

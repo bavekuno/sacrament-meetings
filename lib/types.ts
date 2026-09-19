@@ -9,6 +9,7 @@ export interface Hymn {
     title: string;
 }
 
+
 export interface SpeakerItem {
     name: string;
     topic: string;
@@ -19,6 +20,7 @@ export interface SpeakerItem {
 export interface WardBusinessItem {
     description: string;
 }
+
 
 export interface SacramentMeeting {
     id: number;

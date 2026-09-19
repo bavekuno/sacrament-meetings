@@ -8,6 +8,7 @@ const links = [
   { href: "/meetings/current", label: "Current" },
 ];
 
+
 export default function NavLinks() {
   const pathname = usePathname();
 

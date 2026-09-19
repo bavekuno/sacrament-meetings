@@ -8,6 +8,7 @@ export default function MeetingCard({ meeting }: { meeting: SacramentMeeting }) 
     day: "numeric",
   });
 
+  
   return (
     <Link href={`/meetings/${meeting.id}`}>
       <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-4 hover:shadow-md transition-shadow">

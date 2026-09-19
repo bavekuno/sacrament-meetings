@@ -99,6 +99,7 @@ export function getMeetings(date?: string | null): SacramentMeeting[] {
     return meetings;
 }
 
+
 export function getMeetingById(id: number): SacramentMeeting | null {
     return meetings.find(m => m.id === id) ?? null;
 }

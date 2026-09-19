@@ -5,15 +5,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NavLinks from "@/components/NavLinks";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
 
 export const metadata: Metadata = {
   title: "Sacrament Meetings",

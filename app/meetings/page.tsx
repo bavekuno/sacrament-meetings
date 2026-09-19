@@ -1,8 +1,14 @@
-import { getMeetings } from "@/lib/meetings-db";
+import { headers } from "next/headers";
 import MeetingCard from "@/components/MeetingCard";
 
 export default async function MeetingsPage() {
-  const meetings = getMeetings();
+  const headersList = await headers();
+  const host = headersList.get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const baseUrl = `${protocol}://${host}`;
+
+  const res = await fetch(`${baseUrl}/api/meetings`, { next: { revalidate: 60 } });
+  const meetings = (await res.json()) as import("@/lib/types").SacramentMeeting[];
 
   return (
     <div className="mx-auto max-w-4xl p-8">

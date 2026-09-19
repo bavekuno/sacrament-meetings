@@ -1,11 +1,17 @@
+import type { NextRequest } from "next/server";
 import type { SacramentMeeting } from "@/lib/types";
 import { getMeetingById } from "@/lib/meetings-db";
 
 export async function GET(
-  _request: Request,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+
+  if (!/^\d+$/.test(id)) {
+    return new Response("Invalid meeting ID", { status: 400 });
+  }
+
   const meeting = getMeetingById(Number(id));
 
   if (!meeting) {

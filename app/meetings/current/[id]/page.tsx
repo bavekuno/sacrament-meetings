@@ -15,7 +15,6 @@ export default async function CurrentMeetingPage() {
   }
 
   const nextMeeting = upcoming[0];
-  const params = Promise.resolve({ id: String(nextMeeting.id) });
 
   return (
     <div className="p-8">

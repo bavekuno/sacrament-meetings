@@ -1,7 +1,9 @@
 import { getMeetings } from "@/lib/meetings-db";
 
+export const dynamic = 'force-dynamic';
+
 export default async function CurrentMeetingPage() {
-  const meetings = getMeetings();
+  const meetings = await getMeetings();
   const upcoming = meetings
     .filter((m) => new Date(m.date) >= new Date(new Date().toISOString().slice(0, 10)))
     .sort((a, b) => a.date.localeCompare(b.date));

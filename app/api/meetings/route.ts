@@ -5,6 +5,6 @@ import { getMeetings } from "@/lib/meetings-db";
 export async function GET(request: NextRequest) {
   const date = request.nextUrl.searchParams.get("date");
 
-  const meetings = getMeetings(date ?? undefined);
+  const meetings = await getMeetings(date ?? undefined);
   return Response.json(meetings satisfies SacramentMeeting[]);
 }

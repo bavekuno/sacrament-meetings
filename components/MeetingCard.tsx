@@ -7,7 +7,6 @@ export default function MeetingCard({ meeting }: { meeting: SacramentMeeting }) 
     month: "short",
     day: "numeric",
   });
-
   
   return (
     <Link href={`/meetings/${meeting.id}`}>

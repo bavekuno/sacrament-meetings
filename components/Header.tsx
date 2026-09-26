@@ -9,8 +9,7 @@ export default function Header() {
     month: "long",
     day: "numeric",
   });
-
-  
+ 
   
   return (
     <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">

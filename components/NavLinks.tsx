@@ -8,8 +8,6 @@ const links = [
   { href: "/meetings/current", label: "Current" },
 ];
 
-
-
 export default function NavLinks() {
   const pathname = usePathname();
 
@@ -29,6 +27,7 @@ export default function NavLinks() {
             <li key={link.href}>
               <Link
                 href={link.href}
+                aria-current={active ? "page" : undefined}
                 className={
                   active
                     ? "font-semibold text-foreground border-b-2 border-primary pb-0.5"

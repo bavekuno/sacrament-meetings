@@ -40,3 +40,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 >>>>>>> 94a5d23821c300fe33b26d19d9de1501a09de14c
 
 Brian
+DATABASE_URL="postgresql://neondb_owner:npg_agjfvsckM43N@ep-orange-forest-avgmksnd-pooler.c-11.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require"

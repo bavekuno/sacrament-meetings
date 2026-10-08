@@ -2,6 +2,7 @@ import { getMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
 import { MeetingSearch } from "@/components/MeetingSearch";
 import MeetingCard from "@/components/MeetingCard";
 import { Pagination } from "@/components/Pagination";
+import { deleteMeeting } from "@/lib/actions";
 
 export default async function MeetingsPage(props: {
   searchParams?: Promise<{ query?: string; page?: string; date?: string }>;
@@ -25,7 +26,17 @@ export default async function MeetingsPage(props: {
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {meetings.map((meeting) => (
-            <MeetingCard key={meeting.id} meeting={meeting} />
+            <div key={meeting.id} className="flex flex-col">
+              <MeetingCard meeting={meeting} />
+              <form action={deleteMeeting.bind(null, meeting.id)} className="mt-2">
+                <button
+                  type="submit"
+                  className="text-red-600 hover:text-red-800 text-sm"
+                >
+                  Delete
+                </button>
+              </form>
+            </div>
           ))}
         </div>
       )}

@@ -1,8 +1,20 @@
-export default function EditMeetingPage() {
+import { getMeetingById } from '@/lib/meetings-db';
+import { notFound } from 'next/navigation';
+import EditMeetingForm from './edit-form';
+
+export default async function EditMeetingPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  const id = Number(params.id);
+  const meeting = await getMeetingById(id);
+
+  if (!meeting) {
+    notFound();
+  }
+
   return (
     <div className="mx-auto max-w-2xl p-8">
       <h1 className="text-3xl font-bold mb-4">Edit Meeting</h1>
-      <p className="text-zinc-600 dark:text-zinc-400">Coming in Week 04</p>
+      <EditMeetingForm meeting={meeting} id={id} />
     </div>
   );
 }

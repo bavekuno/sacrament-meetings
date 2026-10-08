@@ -4,7 +4,7 @@ export default function MeetingsLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) {  
   return (
     <section className="flex-1">
       <div className="mx-auto max-w-4xl px-4 py-4">

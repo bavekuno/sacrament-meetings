@@ -13,13 +13,16 @@ export default function Header() {
   
   return (
     <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">
-      <div className="mx-auto max-w-4xl px-4 py-4 flex flex-col gap-1">
-        <Link href="/" className="text-xl font-bold hover:underline">
+      <div className="mx-auto max-w-4xl px-4 py-4">
+        <Link
+          href="/"
+          className="text-xl font-bold text-foreground transition-colors duration-200 hover:text-primary"
+        >
           Ward Sacrament Meetings
         </Link>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">{dateStr}</p>
+        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{dateStr}</p>
+        <NavLinks />
       </div>
-      <NavLinks />
     </header>
   );
 }

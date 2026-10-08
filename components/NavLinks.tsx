@@ -19,8 +19,8 @@ export default function NavLinks() {
   };
 
   return (
-    <nav className="mx-auto max-w-4xl px-4">
-      <ul className="flex gap-4 text-sm">
+    <nav className="mt-3" aria-label="Main navigation">
+      <ul className="flex gap-2 text-sm">
         {links.map((link) => {
           const active = isActive(link.href);
           return (
@@ -28,11 +28,11 @@ export default function NavLinks() {
               <Link
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={
+                className={`inline-block rounded-md px-3 py-1.5 font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black ${
                   active
-                    ? "font-semibold text-foreground border-b-2 border-primary pb-0.5"
-                    : "text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white"
-                }
+                    ? "bg-zinc-900 text-white shadow-sm dark:bg-zinc-100 dark:text-zinc-900"
+                    : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 hover:shadow-sm dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+                }`}
               >
                 {link.label}
               </Link>

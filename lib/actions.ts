@@ -5,6 +5,9 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { addMeeting, updateMeeting as updateMeetingDb, deleteMeeting as deleteMeetingDb } from './meetings-db';
 import type { SacramentMeeting, WardBusinessItem, SpeakerItem } from './types';
+import { signIn } from '@/auth';
+import { auth } from '@/auth';
+import { AuthError } from 'next-auth';
 
 const MeetingFormSchema = z.object({
   date: z.string().min(1, 'Date is required.'),
@@ -88,6 +91,35 @@ function formDataToMeeting(data: z.infer<typeof MeetingFormSchema>): Omit<Sacram
   };
 }
 
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirectTo: '/meetings',
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid email or password.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
+
+async function requireOwnerSession() {
+  const session = await auth();
+  if (!session?.user) throw new Error('Not authenticated');
+  return session;
+}
+
 function buildRaw(formData: FormData) {
   return {
     date: formData.get('date'),
@@ -111,6 +143,7 @@ function buildRaw(formData: FormData) {
 
 export async function createMeeting(prevState: State | undefined, formData: FormData): Promise<State> {
   try {
+    await requireOwnerSession();
     const validatedFields = MeetingFormSchema.safeParse(buildRaw(formData));
     if (!validatedFields.success) {
       return {
@@ -137,6 +170,7 @@ export async function updateMeeting(
   formData: FormData
 ): Promise<State> {
   try {
+    await requireOwnerSession();
     const validatedFields = MeetingFormSchema.safeParse(buildRaw(formData));
     if (!validatedFields.success) {
       return {
@@ -159,6 +193,7 @@ export async function updateMeeting(
 
 export async function deleteMeeting(id: number) {
   try {
+    await requireOwnerSession();
     await deleteMeetingDb(id);
     revalidatePath('/meetings');
     redirect('/meetings');

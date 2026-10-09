@@ -2,7 +2,7 @@ import { getMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
 import { MeetingSearch } from "@/components/MeetingSearch";
 import MeetingCard from "@/components/MeetingCard";
 import { Pagination } from "@/components/Pagination";
-import { deleteMeeting } from "@/lib/actions";
+import { deleteMeeting } from "@/lib/actions"; // deleteMeeting still exported
 
 export default async function MeetingsPage(props: {
   searchParams?: Promise<{ query?: string; page?: string; date?: string }>;
@@ -44,3 +44,4 @@ export default async function MeetingsPage(props: {
     </div>
   );
 }
+

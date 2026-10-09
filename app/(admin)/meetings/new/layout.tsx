@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Meetings",
-  description: "Browse ward sacrament meetings organized by date and details.",
+  title: "New Meeting",
+  description: "Create a new sacrament meeting for the ward.",
 };
 
-export default function MeetingsLayout({
+export default function NewMeetingLayout({
   children,
 }: {
   children: React.ReactNode;

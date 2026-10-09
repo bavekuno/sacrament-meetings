@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SessionProvider } from "next-auth/react";
 
 
 const geistSans = Geist({
@@ -18,8 +19,18 @@ const geistMono = Geist_Mono({
 
 
 export const metadata: Metadata = {
-  title: "Sacrament Meetings",
-  description: "Ward sacrament meeting organizer",
+  title: {
+    default: "Ward Sacrament Meetings | Planner",
+    template: "%s | Ward Sacrament Meetings",
+  },
+  description: "Ward sacrament meeting planner for organizing meetings, speakers, hymns, and announcements.",
+  metadataBase: new URL("http://localhost:3000"),
+  openGraph: {
+    title: "Ward Sacrament Meetings | Planner",
+    description: "Ward sacrament meeting planner for organizing meetings, speakers, hymns, and announcements.",
+    type: "website",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -29,9 +40,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SessionProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );

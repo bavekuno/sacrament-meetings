@@ -99,8 +99,9 @@ export async function authenticate(
     await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
-      redirectTo: '/meetings',
+      redirect: false,
     });
+    redirect('/meetings');
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

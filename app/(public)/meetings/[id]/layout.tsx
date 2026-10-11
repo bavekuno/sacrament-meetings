@@ -1,16 +1,20 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { getMeetingById } from "@/lib/meetings-db";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const id = Number(params.id);
-  const meeting = await getMeetingById(id);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const numId = Number(id);
+  if (isNaN(numId)) {
+    return {
+      title: "Meeting Not Found",
+      description: "The requested sacrament meeting could not be found.",
+    };
+  }
+  const meeting = await getMeetingById(numId);
   
   if (!meeting) {
     return {
